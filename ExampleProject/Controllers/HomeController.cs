@@ -16,6 +16,19 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Test()
+    {
+        return View();
+    }
+
+    public IActionResult Receipt(string submission, string another)
+    {
+        ViewData["Submission"] = submission;
+        ViewData["Another"] = another;
+        return View();
+    }
+
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

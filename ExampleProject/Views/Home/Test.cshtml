@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Test Page";
+}
+
+<ul>
+@for(int i = 0; i < 10; i++) {
+    <li>Item @(i+1)</li>
+}
+</ul>
+
+<form asp-controller="Home" asp-action="Receipt" method="post">
+    <input id="submission" name="submission" type="text" />
+    <input id="another" name="another" type="text" />
+    <input type="submit" />
+</form>
