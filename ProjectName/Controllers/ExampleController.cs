@@ -1,33 +1,40 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ExampleProject.Models;
+using ProjectName.Models;
 
-namespace ExampleProject.Controllers;
+namespace ProjectName.Controllers;
 
-public class HomeController : Controller
+public class ExampleController : Controller
 {
+
     public IActionResult Index()
     {
         return View();
     }
+    public IActionResult Details()
+    {
+        return View();
+    }
+    public IActionResult Create()
+    {
+        return View();
+    }
+    public IActionResult Edit()
+    {
+        return View();
+    }
+    public IActionResult Delete()
+    {
+        return View();
+    }
+
+
 
     public IActionResult Privacy()
     {
         return View();
     }
-
-    public IActionResult Test()
-    {
-        return View();
-    }
-
-    public IActionResult Receipt(string submission, string another)
-    {
-        ViewData["Submission"] = submission;
-        ViewData["Another"] = another;
-        return View();
-    }
-
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
