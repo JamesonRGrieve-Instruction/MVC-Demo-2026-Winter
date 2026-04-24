@@ -23,6 +23,16 @@ public class HomeController : Controller
 
     public IActionResult Output(string name, string town, string food, string footwear, string vehicle, string colour)
     {
+        if (string.IsNullOrWhiteSpace(name) || 
+        string.IsNullOrWhiteSpace(town) || 
+        string.IsNullOrWhiteSpace(food) || 
+        string.IsNullOrWhiteSpace(footwear) || 
+        string.IsNullOrWhiteSpace(vehicle) || 
+        string.IsNullOrWhiteSpace(colour)
+        )
+        {
+            return RedirectToAction(nameof(Input));
+        }
         ViewData["Name"] = name;
         ViewData["Town"] = town;
         ViewData["Food"] = food;
