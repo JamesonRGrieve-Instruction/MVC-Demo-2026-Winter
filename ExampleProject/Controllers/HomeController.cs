@@ -16,15 +16,19 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Test()
+    public IActionResult Input()
     {
         return View();
     }
 
-    public IActionResult Receipt(string submission, string another)
+    public IActionResult Output(string name, string town, string food, string footwear, string vehicle, string colour)
     {
-        ViewData["Submission"] = submission;
-        ViewData["Another"] = another;
+        ViewData["Name"] = name;
+        ViewData["Town"] = town;
+        ViewData["Food"] = food;
+        ViewData["Footwear"] = footwear;
+        ViewData["Vehicle"] = vehicle;
+        ViewData["Colour"] = colour;
         return View();
     }
 
