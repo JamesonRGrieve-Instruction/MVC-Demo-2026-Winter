@@ -9,19 +9,19 @@ namespace ProjectName
 
     public class VehicleController : Controller
     {
-        private static VehicleContext db = new VehicleContext();
+        private static List<Vehicle> vehicles = new List<Vehicle>();
 
         // GET: Vehiclecontroller
         public ActionResult Index()
         {
-            return View(db.Vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name));
+            return View(vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name));
         }
 
         // GET: Vehiclecontroller/Details/5
         [HttpGet("Vehicle/Details/{VIN}")]
         public ActionResult Details([FromRoute] string VIN)
         {
-            return View(db.Vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN));
+            return View(vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN));
         }
 
         // GET: Vehiclecontroller/Create
@@ -38,8 +38,8 @@ namespace ProjectName
             try
             {
                 Vehicle.UserID = User.Identity.Name;
-                db.Vehicles.Add(Vehicle);
-                db.SaveChanges();
+                vehicles.Add(Vehicle);
+                
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -54,7 +54,7 @@ namespace ProjectName
         {
             try
             {
-                return View(db.Vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN));
+                return View(vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN));
             }
             catch
             {
@@ -70,7 +70,7 @@ namespace ProjectName
         {
             try
             {
-                Vehicle target = db.Vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN);
+                Vehicle target = vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN);
                 target.VIN = Vehicle.VIN;
                 target.ModelYear = Vehicle.ModelYear;
                 target.Colour = Vehicle.Colour;
@@ -78,7 +78,7 @@ namespace ProjectName
                 target.Model = Vehicle.Model;
                 target.PurchaseDate = Vehicle.PurchaseDate;
                 target.SaleDate = Vehicle.SaleDate;
-                db.SaveChanges();
+                
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -93,7 +93,7 @@ namespace ProjectName
         {
             try
             {
-                return View(db.Vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN));
+                return View(vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN));
             }
             catch
             {
@@ -109,9 +109,9 @@ namespace ProjectName
         {
             try
             {
-                Vehicle target = db.Vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN);
-                db.Vehicles.Remove(target);
-                db.SaveChanges();
+                Vehicle target = vehicles.Where(Vehicle => Vehicle.UserID == User.Identity.Name).ToList().Find(x => x.VIN == VIN);
+                vehicles.Remove(target);
+                
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
