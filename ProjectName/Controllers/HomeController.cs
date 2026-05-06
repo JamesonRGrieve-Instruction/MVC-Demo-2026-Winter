@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectName.Models;
+using ProjectName.Models.Exceptions;
 
 namespace ProjectName.Controllers;
 
@@ -12,11 +13,23 @@ public class HomeController : Controller
     [Authorize]
     public IActionResult Index(string name)
     {
-        if (!string.IsNullOrWhiteSpace(name)) examples.Add(new Example()
+        ViewBag.Exception = new CompositeException();
+        if (string.IsNullOrWhiteSpace(name)) 
         {
-            name = name,
-            UserName =  User.Identity.Name
-        });
+            ViewBag.Exception.SubExceptions.Add(new Exception("Must provide name."));
+        }
+        
+
+        if (ViewBag.Exception.SubExceptions.Count == 0) {
+            examples.Add(new Example()
+            {
+                name = name,
+                UserName =  User.Identity.Name
+            });
+        }
+
+
+
         ViewData["Examples"] = examples.Where(example => example.UserName == User.Identity.Name).ToArray();
         return View();
     }
